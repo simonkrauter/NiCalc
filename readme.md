@@ -40,14 +40,15 @@ Keyboard commands
 Screenshots
 -----------
 
-<a href="https://github.com/trustable-code/NiCalc/blob/master/screenshot-windows.png"><img src="https://raw.githubusercontent.com/trustable-code/NiCalc/master/screenshot-windows.png" width="500"></a>
+<a href="https://github.com/trustable-code/NiCalc/blob/master/screenshot-windows.png"><img src="https://raw.githubusercontent.com/trustable-code/NiCalc/master/screenshot-windows.png" width="400"></a>
 
-<a href="https://github.com/trustable-code/NiCalc/blob/master/screenshot-gtk.png"><img src="https://raw.githubusercontent.com/trustable-code/NiCalc/master/screenshot-gtk.png" width="500"></a>
+<a href="https://github.com/trustable-code/NiCalc/blob/master/screenshot-gtk.png"><img src="https://raw.githubusercontent.com/trustable-code/NiCalc/master/screenshot-gtk.png" width="400"></a>
 
 Download
 --------
 
-
+* [Binary downloads for Windows and Linux](https://github.com/trustable-code/NiCalc/releases)
+* macOS users can try the Gtk version or wait for native macOS support
 
 License
 -------
