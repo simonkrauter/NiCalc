@@ -29,7 +29,7 @@ The input term may consist of:
 Example:
 
 Input: `(2^16+2*3-sin(pi))/2`<br>
-Result: `32,770.5`
+Result: `32,771`
 
 Keyboard commands
 -----------------
