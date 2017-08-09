@@ -14,14 +14,16 @@ The input term may consist of:
 * Arithmetic operators: `+`, `-`, `*`, `/`, `^` (power)
 * Brackets: `(`, `)`
 * Functions:
-  * `sqrt()`
-  * `ln()`
-  * `sin()`
-  * `cos()`
-  * `tan()`
-  * `round()`
-  * `floor()`
+  * `abs()`
   * `ceil()`
+  * `cos()`
+  * `floor()`
+  * `ln()`
+  * `round()`
+  * `sin()`
+  * `sqrt()`
+  * `tan()`
+
 * Constants:
   * `pi`
   * `e`
