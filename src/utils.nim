@@ -93,6 +93,10 @@ proc calculate*(term: string): float =
     if j == t.high:
       i.dec
     else:
+      let left = t.substr(0, j)
+      let right = t.substr(j + 1).strip
+      if right[0] in ['+', '-', '*', '/', '^']:
+        return calculate($left.calculate & right)
       i = j + 1
   else:
     if t.contains(')'):
@@ -128,6 +132,9 @@ proc calculate*(term: string): float =
     if t.continuesWithSafe("sqrt", i - 3):
       rightValue = sqrt(rightValue).checkNumber
       i.dec(4)
+    if t.continuesWithSafe("abs", i - 2):
+      rightValue = abs(rightValue).checkNumber
+      i.dec(3)
     if t.continuesWithSafe("sin", i - 2):
       rightValue = sin(rightValue).checkNumber
       i.dec(3)

@@ -1,7 +1,7 @@
 NiCalc
 ======
 
-NiCalc is a simple calculator written in [Nim](https://nim-lang.org/) using [NiGui](https://github.com/trustable-code/NiGui). 
+NiCalc is a simple calculator written in [Nim](https://nim-lang.org/) using [NiGui](https://github.com/trustable-code/NiGui).
 
 Supported elements
 ------------------
@@ -22,7 +22,7 @@ The input term may consist of:
   * `round()`
   * `floor()`
   * `ceil()`
-* Constants: 
+* Constants:
   * `pi`
   * `e`
 
@@ -50,7 +50,15 @@ Download
 * [Binary downloads for Windows and Linux](https://github.com/trustable-code/NiCalc/releases)
 * macOS users can try the Gtk version or wait for native macOS support
 
+History
+-------
+
+* Version 1.0 (2017-07-02) - First release
+* Version 1.1 (2017-08-09) - Fixed handling of brackets, added "abs()" function
+
 License
 -------
 
-NiCalc is FLOSS (free and open-source software) under the [GNU General Public License v3](http://www.gnu.de/documents/gpl-3.0.en.html).
+NiCalc is FLOSS (free and open-source software).<br>
+All files in this repository are licensed under the [GNU General Public License version 3](https://opensource.org/licenses/GPL-3.0) (GPLv3).<br>
+Copyright 2017 Simon Krauter
