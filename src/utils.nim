@@ -74,7 +74,8 @@ proc calculate*(term: string): float =
     return 3.14159265358979323846
   if t == "e":
     return 2.71828182845904523536
-  var i = t.find("(")
+  let k = t.find("(")
+  var i = k
   if i != -1:
     var depth = 0
     var j = i + 1
@@ -149,6 +150,8 @@ proc calculate*(term: string): float =
       i.dec(2)
     if i == -1:
       return rightValue
+    if k != -1:
+      return calculate(t.substr(0, i) & $rightValue).checkNumber
     while i > 0 and t[i] == ' ':
       i.dec
     let op = t[i]
