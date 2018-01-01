@@ -65,6 +65,7 @@ assert("ceil(1.1)", 2)
 assert("round(1.5)", 2)
 assert("abs(-10)", 10)
 assert("(2^16+2*3-sin(pi/2))/2", 32770.5)
+assert("2 / round(2)", 1)
 
 assert("1++1", 0, Error1)
 assert("((-))", 0, Error1)

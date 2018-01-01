@@ -149,6 +149,8 @@ proc calculate*(term: string): float =
       i.dec(2)
     if i == -1:
       return rightValue
+    while i > 0 and t[i] == ' ':
+      i.dec
     let op = t[i]
     let left = t.substr(0, i - 1)
     if op == '+':
