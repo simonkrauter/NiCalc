@@ -48,6 +48,7 @@ type
     Error7
     Error8
     Error9
+    Error10
 
   CalcException* = ref object of Exception
     errorCode*: ErrorCode
@@ -74,8 +75,9 @@ proc calculate*(term: string): float =
     return 3.14159265358979323846
   if t == "e":
     return 2.71828182845904523536
-  let k = t.find("(")
-  var i = k
+  let bracketStart = t.find("(")
+  var i = bracketStart
+  var bracketEnd = -1
   if i != -1:
     var depth = 0
     var j = i + 1
@@ -91,14 +93,7 @@ proc calculate*(term: string): float =
       raise newCalcException(Error2, "Missing ')'")
     if i == 0 and j == t.high:
       return t.substr(1, t.len - 2).calculate
-    if j == t.high:
-      i.dec
-    else:
-      let left = t.substr(0, j)
-      let right = t.substr(j + 1).strip
-      if right[0] in ['+', '-', '*', '/', '^']:
-        return calculate($left.calculate & right)
-      i = j + 1
+    bracketEnd = j
   else:
     if t.contains(')'):
       raise newCalcException(Error3, "Unexpected ')'")
@@ -118,40 +113,44 @@ proc calculate*(term: string): float =
     except:
       raise newCalcException(Error4, "Invalid term '" & t & "'")
   else:
+    if bracketStart != -1:
+      var middleValue = t.substr(bracketStart + 1, bracketEnd - 1).calculate
+      let rightValue = t.substr(bracketEnd + 1).strip
+      if rightValue.len > 0 and not(rightValue[0] in ['+', '-', '*', '/', '^']):
+        raise newCalcException(Error10, "Missing operator after '" & t.substr(0, bracketEnd) & "'")
+      while i > 1 and t[i - 1] == ' ':
+        i.dec
+      if t.continuesWithSafe("round", i - 5):
+        middleValue = round(middleValue)
+        i.dec(5)
+      elif t.continuesWithSafe("floor", i - 5):
+        middleValue = floor(middleValue)
+        i.dec(5)
+      elif t.continuesWithSafe("ceil", i - 4):
+        middleValue = ceil(middleValue)
+        i.dec(4)
+      elif t.continuesWithSafe("sqrt", i - 4):
+        middleValue = sqrt(middleValue).checkNumber
+        i.dec(4)
+      elif t.continuesWithSafe("abs", i - 3):
+        middleValue = abs(middleValue).checkNumber
+        i.dec(3)
+      elif t.continuesWithSafe("sin", i - 3):
+        # echo "sin found"
+        middleValue = sin(middleValue).checkNumber
+        i.dec(3)
+      elif t.continuesWithSafe("cos", i - 3):
+        middleValue = cos(middleValue).checkNumber
+        i.dec(3)
+      elif t.continuesWithSafe("tan", i - 3):
+        middleValue = tan(middleValue).checkNumber
+        i.dec(3)
+      elif t.continuesWithSafe("ln", i - 2):
+        middleValue = ln(middleValue).checkNumber
+        i.dec(2)
+      let leftValue = t.substr(0, i - 1)
+      return calculate(leftValue & $middleValue & rightValue).checkNumber
     var rightValue = t.substr(i + 1).calculate
-    while i > 0 and t[i] == ' ':
-      i.dec
-    if t.continuesWithSafe("round", i - 4):
-      rightValue = round(rightValue)
-      i.dec(5)
-    if t.continuesWithSafe("floor", i - 4):
-      rightValue = floor(rightValue)
-      i.dec(5)
-    if t.continuesWithSafe("ceil", i - 3):
-      rightValue = ceil(rightValue)
-      i.dec(4)
-    if t.continuesWithSafe("sqrt", i - 3):
-      rightValue = sqrt(rightValue).checkNumber
-      i.dec(4)
-    if t.continuesWithSafe("abs", i - 2):
-      rightValue = abs(rightValue).checkNumber
-      i.dec(3)
-    if t.continuesWithSafe("sin", i - 2):
-      rightValue = sin(rightValue).checkNumber
-      i.dec(3)
-    if t.continuesWithSafe("cos", i - 2):
-      rightValue = cos(rightValue).checkNumber
-      i.dec(3)
-    if t.continuesWithSafe("tan", i - 2):
-      rightValue = tan(rightValue).checkNumber
-      i.dec(3)
-    if t.continuesWithSafe("ln", i - 1):
-      rightValue = ln(rightValue).checkNumber
-      i.dec(2)
-    if i == -1:
-      return rightValue
-    if k != -1:
-      return calculate(t.substr(0, i) & $rightValue).checkNumber
     while i > 0 and t[i] == ' ':
       i.dec
     let op = t[i]
