@@ -57,6 +57,7 @@ History
 
 * Version 1.0 (2017-07-02) - First release
 * Version 1.1 (2017-08-09) - Fixed handling of brackets, added "abs()" function
+* Version 1.2 (2018-01-02) - Fixed handling of brackets
 
 License
 -------
