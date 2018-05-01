@@ -95,6 +95,8 @@ inputTextBox.onTextChange = proc(event: TextChangeEvent) =
 
 inputTextBox.onKeyDown = proc(event: ControlKeyEvent) =
   if event.key == Key_Return:
+    when defined(windows):
+      event.cancel = true # stops annoying ding sound on windows
     if lastCalculation == "":
       updateResult(nil)
     if lastCalculation != "":
