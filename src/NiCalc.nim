@@ -93,7 +93,7 @@ inputTextBox.onTextChange = proc(event: TextChangeEvent) =
   timer.stop()
   timer = startTimer(500, updateResult)
 
-inputTextBox.onKeyDown = proc(event: ControlKeyEvent) =
+inputTextBox.onKeyDown = proc(event: KeyboardEvent) =
   if event.key == Key_Return:
     if lastCalculation == "":
       updateResult(nil)
@@ -102,7 +102,7 @@ inputTextBox.onKeyDown = proc(event: ControlKeyEvent) =
       historyTextArea.scrollToBottom()
       historyContainer.show()
 
-window.onKeyDown = proc(event: WindowKeyEvent) =
+window.onKeyDown = proc(event: KeyboardEvent) =
   if event.key == Key_Escape:
     window.dispose()
 
