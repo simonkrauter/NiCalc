@@ -19,6 +19,7 @@ The input term may consist of:
   * `cos()`
   * `floor()`
   * `ln()`
+  * `log2()`
   * `round()`
   * `sin()`
   * `sqrt()`
@@ -64,4 +65,4 @@ License
 
 NiCalc is FLOSS (free and open-source software).<br>
 All files in this repository are licensed under the [GNU General Public License version 3](https://opensource.org/licenses/GPL-3.0) (GPLv3).<br>
-Copyright 2017 Simon Krauter
+Copyright 2017-2019 Simon Krauter

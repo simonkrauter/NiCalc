@@ -136,7 +136,6 @@ proc calculate*(term: string): float =
         middleValue = abs(middleValue).checkNumber
         i.dec(3)
       elif t.continuesWithSafe("sin", i - 3):
-        # echo "sin found"
         middleValue = sin(middleValue).checkNumber
         i.dec(3)
       elif t.continuesWithSafe("cos", i - 3):
@@ -148,6 +147,9 @@ proc calculate*(term: string): float =
       elif t.continuesWithSafe("ln", i - 2):
         middleValue = ln(middleValue).checkNumber
         i.dec(2)
+      elif t.continuesWithSafe("log2", i - 4):
+        middleValue = log2(middleValue).checkNumber
+        i.dec(4)
       let leftValue = t.substr(0, i - 1)
       return calculate(leftValue & $middleValue & rightValue).checkNumber
     var rightValue = t.substr(i + 1).calculate
