@@ -12,7 +12,7 @@ proc assert(term: string, expectedResult: float, expectedError = NoError) =
   except CalcException:
     exception = cast[CalcException](getCurrentException())
   if expectedError == NoError and exception != nil:
-    echo "TEST FAILED: ", term, " = ", expectedResult.formatFloat, "  result: ", exception.errorCode
+    echo "TEST FAILED: ", term, " = ", expectedResult.formatFloat, "  result: ", exception.errorCode, ": ", exception.msg
     failedTests.inc()
   elif expectedError != NoError and exception == nil:
     echo "TEST FAILED: ", term, "  expectedError: ", expectedError, "  result: NoError"
@@ -71,19 +71,20 @@ assert("2 / round(2)", 1)
 assert("8+4/round(2)", 10)
 assert("10-10/round(5)/2", 9)
 assert("sin (pi / 2)", 1)
+assert("1^(-1)", 1)
 
-assert("1++1", 0, Error1)
+assert("1++1", 0, Error10)
 assert("((-))", 0, Error1)
-assert("*1", 0, Error1)
+assert("*1", 0, Error10)
 assert(" ", 0, Error1)
 assert("(2)4", 0, Error10)
 assert("1-(2+3", 0, Error2)
 assert("(1-2+3", 0, Error2)
-assert("1-2+3)", 0, Error3)
-assert("1abc", 0, Error4)
-assert("inf", 0, Error4)
+assert("1-2+3)", 0, Error10)
+assert("1abc", 0, Error10)
+assert("inf", 0, Error1)
 assert("sqrt(-1)", 0, Error5)
-assert("1/(2-1-1)", 0, Error6)
+assert("1/(2-1-1)", 0, Error9)
 assert("ln(0)", 0, Error8)
 assert("-ln(0)", 0, Error8)
 assert("2^9999", 0, Error9)
